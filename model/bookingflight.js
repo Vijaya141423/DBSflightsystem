@@ -20,6 +20,10 @@ const BookingFlightSchema = new mongoose.Schema(
       type: Number,
       default: 80,
     },
+    status: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

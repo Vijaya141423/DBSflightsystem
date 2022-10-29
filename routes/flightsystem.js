@@ -92,6 +92,7 @@ router.get(
       destinationPlace,
       numberofSeatAvailability,
       user: req.userId,
+      status: true,
     });
     return res.statu(200).json({ message: "Flight is on hold" });
     // after this in react we will redirect to payment;
@@ -109,5 +110,23 @@ router.get(
   })
 );
 
-router.get("/cancel");
+router.get(
+  "/cancel/:id",
+  wrapAsync(async (req, res) => {
+    const { id } = req.params;
+    const getFlightById = await FlightSystem.findById(id);
+    getFlightById.status = false;
+    await getFlightById.save();
+    return res.status.json({ message: "cancelled successfully" });
+    // after that client side se payment ko return kar denge
+  })
+);
+
+router.get(
+  "/listedflite",
+  wrapAsync(async (req, res) => {
+    const totalFlight = await FlightSystem.find({});
+    return res.status.json(totalFlight);
+  })
+);
 module.exports = router;
