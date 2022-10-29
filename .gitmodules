@@ -1,0 +1,6 @@
+[submodule "client_side"]
+	path = client_side
+	url = https://github.com/BalajeeMishra/client_side.git
+
+	
+
